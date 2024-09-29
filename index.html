@@ -1,93 +1,207 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity App</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f4f8;
+    }
 
-        <style>
-            /* Basic styles */
-            #timerSettings {
-              margin-bottom: 20px;
-            }
-        
-            #timerSettings select {
-              padding: 5px;
-              margin-right: 5px;
-            }
-        
-            #timerSettings button {
-              padding: 5px 10px;
-            }
-          </style>
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
 
-        <title>
-            Productivity App
-        </title> 
-        <link rel="stylesheet" href="style.css">
-        <body>
-                  
-            <audio id="alarmSound" src="Alarm.mp3" preload="auto"></audio>
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    /* Timer Styles */
+    #timerSettings select, #timerSettings button {
+      padding: 10px;
+      margin-right: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    #timerSettings button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+
+    #timerSettings button:hover {
+      background-color: #218838;
+    }
+
+    #timerMessage {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    img#play_pause {
+      margin-top: 20px;
+      cursor: pointer;
+      width: 50px;
+    }
+
+    /* Task List Styles */
+    h2 {
+      margin-top: 30px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    input#inputText, input#taskDate {
+      padding: 10px;
+      width: 80%;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    button.addBtn {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button.addBtn:hover {
+      background-color: #0056b3;
+    }
+
+    ul#list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    ul#list li {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: move;
+    }
+
+    ul#list li:hover {
+      background-color: #eef2f5;
+    }
+
+    ul#list li button {
+      background-color: transparent;
+      border: none;
+      color: #ff5c5c;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    ul#list li button:hover {
+      color: #ff3333;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Productivity App</h1>
+
+    <p>Select timer length and click set timer when you are ready</p>
+
+    <div id="timerSettings">
+      <!-- Timer Dropdowns -->
+      <select id="hours">
+        <option value="0">Hours</option>
+        <script>
+          for (let i = 0; i <= 23; i++) {
+            document.write('<option value="' + i + '">' + i + ' hr</option>');
+          }
+        </script>
+      </select>
+
+      <select id="minutes">
+        <option value="0">Minutes</option>
+        <script>
+          for (let i = 0; i <= 59; i++) {
+            document.write('<option value="' + i + '">' + i + ' min</option>');
+          }
+        </script>
+      </select>
+
+      <select id="seconds">
+        <option value="0">Seconds</option>
+        <script>
+          for (let i = 0; i <= 59; i++) {
+            document.write('<option value="' + i + '">' + i + ' sec</option>');
+          }
+        </script>
+      </select>
+
+      <!-- Set Timer Button -->
+      <button onclick="setTimer()">Set Timer</button>
+    </div>
+
+    <p id="timerMessage">Press the Green button to start the timer</p>
+
+    <img id="play_pause" src="green_play.png" alt="Play/Pause" />
+
+    <h2>Task List</h2>
+    <!-- Calendar and task input aligned and spaced properly -->
+    <div class="inputGroup">
+      <input type="text" id="taskDate" placeholder="Pick a date for this task">
+      <input type="text" id="inputText" placeholder="Enter a task">
+    </div>
+    <button class="addBtn" onclick="newElement()">Add</button>
+
+    <ul id="list">
+      <!-- <li>
+        Sample Task
+        <button onclick="deleteTask(this)">✖</button>
+      </li> -->
+    </ul>
 
 
+    <audio id="alarmSound" src="Alarm.mp3" preload="auto"></audio>
 
-                    <div class="center">          
-                    <!--- timer -->    
-                
-
-                    <p> Select timer length and click set timer when you are ready</p>
-                    <div id="timerSettings">
-                        <!-- Dropdowns for hours, minutes, and seconds -->
-                        <select id="hours">
-                          <option value="0">Hours</option>
-                          <!-- Add options for hours from 0 to 23 -->
-                          <script>
-                            for (let i = 0; i <= 23; i++) {
-                              document.write('<option value="' + i + '">' + i + ' hr</option>');
-                            }
-                          </script>
-                        </select>
-                      
-                        <select id="minutes">
-                          <option value="0">Minutes</option>
-                          <!-- Add options for minutes from 0 to 59 -->
-                          <script>
-                            for (let i = 0; i <= 59; i++) {
-                              document.write('<option value="' + i + '">' + i + ' min</option>');
-                            }
-                          </script>
-                        </select>
-                      
-                        <select id="seconds">
-                          <option value="0">Seconds</option>
-                          <!-- Add options for seconds from 0 to 59 -->
-                          <script>
-                            for (let i = 0; i <= 59; i++) {
-                              document.write('<option value="' + i + '">' + i + ' sec</option>');
-                            }
-                          </script>
-                        </select>
-                      
-                        <!-- Button to set timer -->
-                        <button onclick="setTimer()">Set Timer</button>
-                       
-
-                      </div>
-                      
-                      <p id="timerMessage">Press the Green button to start the timer</p>
-                      
-                      <img id="play_pause" src="green_play.png" alt="Play/Pause" style="cursor: pointer;">
-                      <script src="timer.js"></script>
-            
-            
-                    
-                    <h2>
-                        TASKLIST
-                        <input type="text" id="inputText">
-                        <button onclick="newElement()" class="addBtn">Add</button>
-                        <ul id="list">
-                            <li>Wake up</li>
-                        </ul>
-                        <script src="tasklist.js"></script>
-                    </h2>
-            </div>
-        </body>
-    </head>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="timer.js"></script>
+    <script src="tasklist.js"></script>
+    <script src="calendar.js"></script>
+  </div>
+</body>
 </html>

@@ -1,55 +1,71 @@
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var button = document.createElement("BUTTON");
-  var txt = document.createTextNode("\u00D7");
-  button.className = "close";
-  button.appendChild(txt);
-  myNodelist[i].appendChild(button);
-}
+let tasksByDate = {}; // Object to store tasks by date
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
-
-// Create a new list item when clicking on the "Add" button
+// Function to create a new task
 function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("inputText").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("list").appendChild(li);
-  }
-  document.getElementById("inputText").value = "";
+  const taskDate = document.getElementById("taskDate").value;
+  const taskText = document.getElementById("inputText").value;
 
-  var button = document.createElement("BUTTON");
-  var txt = document.createTextNode("\u00D7");
-  button.className = "close";
-  button.appendChild(txt);
-  li.appendChild(button);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
+  if (taskText === '' || taskDate === '') {
+    alert("Please enter a task and pick a date.");
+    return;
   }
-} 
+
+  // If there are no tasks for the selected date, initialize an empty array for that date
+  if (!tasksByDate[taskDate]) {
+    tasksByDate[taskDate] = [];
+  }
+
+  // Add the task to the tasks array for the selected date
+  tasksByDate[taskDate].push(taskText);
+
+  // Clear the task input field
+  document.getElementById("inputText").value = '';
+
+  // Save tasks to local storage (optional for persistence)
+  localStorage.setItem('tasksByDate', JSON.stringify(tasksByDate));
+
+  // Display tasks for the selected date
+  displayTasksForDate(taskDate);
+}
+
+// Function to display tasks for a specific date
+function displayTasksForDate(date) {
+  const taskList = document.getElementById('list');
+  taskList.innerHTML = ''; // Clear existing tasks in the list
+
+  const tasks = tasksByDate[date] || [];
+
+  // Iterate over the tasks for the selected date and display them
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.textContent = task;
+
+    // Add close button to the task
+    const button = document.createElement("button");
+    const txt = document.createTextNode("\u00D7");
+    button.className = "close";
+    button.appendChild(txt);
+    button.onclick = function () {
+      tasks.splice(index, 1); // Remove the task from the tasks array
+      tasksByDate[date] = tasks; // Update tasks for the date
+      displayTasksForDate(date); // Re-render the task list
+    };
+
+    li.appendChild(button);
+    taskList.appendChild(li);
+  });
+}
+
+// Load tasks from local storage on page load (if using local storage)
+window.onload = function () {
+  const savedTasks = localStorage.getItem('tasksByDate');
+  if (savedTasks) {
+    tasksByDate = JSON.parse(savedTasks);
+  }
+}
+
+// Event listener to display tasks for the selected date
+document.getElementById('taskDate').addEventListener('change', function () {
+  const selectedDate = document.getElementById('taskDate').value;
+  displayTasksForDate(selectedDate);
+});
