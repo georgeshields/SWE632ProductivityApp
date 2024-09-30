@@ -14,8 +14,8 @@
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
+  align-items: flex-start;  /* Keep alignment to start from the top */
+  min-height: 100vh;  /* Allow scrolling if content exceeds screen height */
   background-color: #f0f4f8;
 }
 
@@ -26,18 +26,21 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;  /* Keep overflow hidden */
+  overflow: hidden;
 }
 
-h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+h1, h2 {
+  text-align: center;
 }
 
 p {
-  margin-bottom: 20px;
-  color: #666;
+  text-align: center;
+}
+
+#timerSettings {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
 #timerSettings select, 
@@ -68,17 +71,22 @@ p {
 img#play_pause {
   margin-top: 20px;
   cursor: pointer;
-  width: 50px;
+  width: 100px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 input#inputText, input#taskDate {
   padding: 10px;
-  width: 80%;
+  width: 96.5%;  /* Set the width to 100% */
   border-radius: 4px;
   border: 1px solid #ddd;
-  margin-right: 10px;
   font-size: 16px;
+  margin-bottom: 10px;  /* Ensure there’s space between fields */
 }
+
 
 button.addBtn {
   padding: 10px 15px;
@@ -88,6 +96,9 @@ button.addBtn {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button.addBtn:hover {
@@ -98,8 +109,9 @@ ul#list {
   list-style-type: none;
   padding: 0;
   margin-top: 20px;
-  max-height: 400px;  /* Set a fixed height to enable scrolling */
-  overflow-y: auto;   /* Enable vertical scrolling */
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100%;
 }
 
 ul#list li {
@@ -129,6 +141,8 @@ ul#list li button {
 ul#list li button:hover {
   color: #ff3333;
 }
+
+
 
   </style>
 </head>
@@ -182,6 +196,16 @@ ul#list li button:hover {
       <input type="text" id="inputText" placeholder="Enter a task">
     </div>
     <button class="addBtn" onclick="newElement()">Add</button>
+    <script>
+      // Add event listener for Enter key on the task input field
+      document.getElementById('inputText').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();  // Prevent form submission or unwanted behavior
+          newElement();  // Trigger the Add task function when Enter is pressed
+        }
+      });
+    </script>
+    
 
     <ul id="list">
       <!-- <li>
@@ -197,6 +221,14 @@ ul#list li button:hover {
     <script src="timer.js"></script>
     <script src="tasklist.js"></script>
     <script src="calendar.js"></script>
+    <script>
+      // Add event listener for Enter key on the task input field
+      document.getElementById('inputText').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          newElement();  // Trigger the Add task function when Enter is pressed
+        }
+      });
+    </script>
     <a href="calendar.html" class="calendarLink">View Task Calendar</a>
   </div>
 </body>

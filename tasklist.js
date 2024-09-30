@@ -104,3 +104,11 @@ document.getElementById('taskDate').addEventListener('change', function () {
   const selectedDate = document.getElementById('taskDate').value;
   displayTasksForDate(selectedDate);
 });
+
+// Add event listener for Enter key on the task input field
+document.getElementById('inputText').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') {
+    newElement();  // Trigger the Add task function when Enter is pressed
+  }
+});
+
