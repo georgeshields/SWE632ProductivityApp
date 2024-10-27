@@ -3,16 +3,14 @@ let time_seconds = 0;
 let isPaused = true; 
 
 function setTimer() { // take information form index.html
-  let hours = parseInt(document.getElementById('hours').value) ;
   let minutes = parseInt(document.getElementById('minutes').value) ;
-  let seconds = parseInt(document.getElementById('seconds').value) ;
 
 // math to calculate the time in seconds to make all under same variable
-  time_seconds = (hours * 3600) + (minutes * 60) + seconds;
+  time_seconds = (minutes * 60) ;
 
   // while timer is running
   if (time_seconds > 0) {
-    document.getElementById('timerMessage').innerText = "Timer set for " + hours + " hr " + minutes + " min " + seconds + " sec";
+    document.getElementById('timerMessage').innerText = "Timer set for " + minutes + " min " ;
     document.getElementById('play_pause').src = 'green_play.png';
     clearInterval(countdown);
   } else {
@@ -61,10 +59,9 @@ function updateTimer() { // called by start timer function
 }
 
 function formatTime(seconds) {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
+  const m = Math.floor((seconds) / 60);
   const s = seconds % 60;
-  return h + " hr " + m + " min " + s + " sec";
+  return m + " min " + s + " sec";
 }
 
 document.getElementById('play_pause').addEventListener('click', toggleTimer);
