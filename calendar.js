@@ -1,6 +1,6 @@
 flatpickr("#taskDate", {
     enableTime: false,
-    dateFormat: "Y-m-d H:i",
+    dateFormat: "Y-m-d",
   });
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -24,14 +24,15 @@ flatpickr("#taskDate", {
     console.log("Rendering calendar...");
     calendar.render();
     console.log("Calendar rendered.");
-  });
+ });
   
   // Function to fetch tasks from localStorage and convert them to FullCalendar events
-  function fetchTasksAsEvents() {
-    console.log("Fetching tasks from localStorage...");
-    let tasksByDate = JSON.parse(localStorage.getItem('tasksByDate')) || {};
   
-    console.log("Tasks fetched: ", tasksByDate);
+  function fetchTasksAsEvents() {
+    //console.log("Fetching tasks from localStorage...");
+    //let tasksByDate = JSON.parse(localStorage.getItem('tasksByDate')) || {};
+  
+    //console.log("Tasks fetched: ", tasksByDate);
     
     let events = [];
   
@@ -40,7 +41,7 @@ flatpickr("#taskDate", {
       title: "Test Event",
       start: new Date().toISOString().slice(0, 10),  // Today's date in YYYY-MM-DD format
       allDay: true
-    });
+    }); 
   
     // Convert tasksByDate to FullCalendar events
     for (let date in tasksByDate) {

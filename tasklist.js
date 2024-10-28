@@ -1,3 +1,5 @@
+
+
 let tasksByDate = {}; // Object to store tasks by date
 let dragged; // Variable to store the dragged item
 
@@ -6,8 +8,12 @@ function newElement() {
   const taskDate = document.getElementById("taskDate").value;
   const taskText = document.getElementById("inputText").value;
 
-  if (taskText === '' || taskDate === '') {
-    alert("Please enter a task and pick a date.");
+  if (taskDate === '') {
+   taskDate = new Date().toISOString().slice(0, 10); // HOW TO INITIALIZE TO TODAYS DATE
+  }
+
+  if (taskText === '') {
+    alert("Please enter a task");
     return;
   }
 
@@ -60,6 +66,22 @@ function displayTasksForDate(date) {
 
     li.appendChild(button);
     taskList.appendChild(li);
+
+    /* trying to figure out how to do edit button
+    const Ebutton = document.createElement("button");
+    const Etxt = document.createTextNode("E");
+    Ebutton.className = "edit";
+    Ebutton.appendChild(Etxt);
+    Ebutton.onclick = function () {
+      tasks.splice(index, 1); // Remove the task from the tasks array
+      document.getElementById("inputText").value = "editing 123"
+      tasksByDate[date] = tasks; // Update tasks for the date
+      displayTasksForDate(date); // Re-render the task list
+    };
+    
+    li.appendChild(button);
+    taskList.appendChild(li);
+    */
   });
 }
 
@@ -102,7 +124,7 @@ window.onload = function () {
 // Event listener to display tasks for the selected date
 document.getElementById('taskDate').addEventListener('change', function () {
   const selectedDate = document.getElementById('taskDate').value;
-  displayTasksForDate(selectedDate);
+  displayTasksForDate(selectedDate); 
 });
 
 // Add event listener for Enter key on the task input field
@@ -110,5 +132,7 @@ document.getElementById('inputText').addEventListener('keydown', function (e) {
   if (e.key === 'Enter') {
     newElement();  // Trigger the Add task function when Enter is pressed
   }
-});
+})
+
+;
 

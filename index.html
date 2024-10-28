@@ -24,11 +24,24 @@ body {
     max-width: 600px;
     background-color: #ffffff; /* White background for content area */
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    min-height: 100vh;
     border: 1px solid #ccc; /* Light border to mimic paper edges */
 }
+.container2 {
+    width: 50%;
+    max-width: 600px;
+    background-color: #ffffff; /* White background for content area */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-height: 100vh;
+    border: 1px solid #ccc; /* Light border to mimic paper edges */
+}
+
 
 h1, h2 {
     text-align: center;
@@ -156,56 +169,21 @@ a.calendarLink, a.helpLink {
 a.calendarLink:hover, a.helpLink:hover {
     text-decoration: underline; /* Underline on hover */
 }
-
+/* END STYLES */
   </style>
 </head>
 <body>
+
+
+
   <div class="container">
     <h1>Productivity App</h1>
 
-    <p>Select timer length and click set timer when you are ready</p>
-
-    <div id="timerSettings">
-      <!-- Timer Dropdowns -->
-      <select id="hours">
-        <option value="0">Hours</option>
-        <script>
-          for (let i = 0; i <= 23; i++) {
-            document.write('<option value="' + i + '">' + i + ' hr</option>');
-          }
-        </script>
-      </select>
-
-      <select id="minutes">
-        <option value="0">Minutes</option>
-        <script>
-          for (let i = 0; i <= 59; i++) {
-            document.write('<option value="' + i + '">' + i + ' min</option>');
-          }
-        </script>
-      </select>
-
-      <select id="seconds">
-        <option value="0">Seconds</option>
-        <script>
-          for (let i = 0; i <= 59; i++) {
-            document.write('<option value="' + i + '">' + i + ' sec</option>');
-          }
-        </script>
-      </select>
-
-      <!-- Set Timer Button -->
-      <button onclick="setTimer()">Set Timer</button>
-    </div>
-
-    <p id="timerMessage">Press the Green button to start the timer</p>
-
-    <img id="play_pause" src="green_play.png" alt="Play/Pause" />
-
+   
     <h2>Task List</h2>
     <!-- Calendar and task input aligned and spaced properly -->
     <div class="inputGroup">
-      <input type="text" id="taskDate" placeholder="Pick a date for this task">
+      <!--<input type="text" id="taskDate" placeholder="Pick a date for this task"> -->
       <input type="text" id="inputText" placeholder="Enter a task">
     </div>
     <button class="addBtn" onclick="newElement()">Add</button>
@@ -213,8 +191,8 @@ a.calendarLink:hover, a.helpLink:hover {
       // Add event listener for Enter key on the task input field
       document.getElementById('inputText').addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
-          e.preventDefault();  // Prevent form submission or unwanted behavior
-          newElement();  // Trigger the Add task function when Enter is pressed
+        e.preventDefault();  // Prevent form submission or unwanted behavior
+        newElement();  // Trigger the Add task function when Enter is pressed
         }
       });
     </script>
@@ -228,10 +206,17 @@ a.calendarLink:hover, a.helpLink:hover {
     </ul>
 
 
-    <audio id="alarmSound" src="Alarm.mp3" preload="auto"></audio>
+   
+
+
+
+
+
+
+   
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="timer.js"></script>
+   
     <script src="tasklist.js"></script>
     <script src="calendar.js"></script>
     <script>
@@ -246,5 +231,68 @@ a.calendarLink:hover, a.helpLink:hover {
     <a href="help.html" class="helpLink" style="display:block; text-align:center; margin-top:20px;">Need Help?</a>
 
   </div>
+
+  <div class = "container2">
+    <p>Select timer length and click set timer when you are ready</p>
+
+    <div id="timerSettings">
+      <!-- Timer Dropdowns -->
+     
+
+      <select id="minutes">
+        <option value="15">Minutes</option>
+        <script>
+          for (let i = 0; i <= 59; i++) {
+            document.write('<option value="' + i + '">' + i + ' min</option>');
+          }
+        </script>
+      </select>
+
+  
+
+      <!-- Set Timer Button -->
+      <button onclick="setTimer()">Set Timer</button>
+    </div>
+
+    <p id="timerMessage">Press the Green button to start the timer</p>
+
+    <img id="play_pause" src="green_play.png" alt="Play/Pause" />
+    <audio id="alarmSound" src="Alarm.mp3" preload="auto"></audio>
+    <script src="timer.js"></script>
+
+
+    <div class = "container3">
+      <h1>Task Calendar</h1>
+      <div id="calendar">
+
+      
+
+        <input type="text" id="taskDate" placeholder="Pick a date for this task">
+
+        <SCRIPT>
+          document.getElementById('taskDate').addEventListener('change', function () {
+          const selectedDate = document.getElementById('taskDate').value;
+          displayTasksForDate(selectedDate); 
+        });
+        </SCRIPT>
+        
+
+        <script src="tasklist.js"></script>
+        <script src="calendar.js"></script>
+        
+      </div> <!-- Calendar will render here -->
+    
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
 </body>
 </html>
