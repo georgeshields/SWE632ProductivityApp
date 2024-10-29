@@ -6,239 +6,219 @@
   <title>Productivity App</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
   <style>
     /* Global Styles */
-body {
-    font-family: 'Georgia', serif; /* Change to a serif font for a journal feel */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;  /* Keep alignment to start from the top */
-    min-height: 100vh;  /* Allow scrolling if content exceeds screen height */
-    background-color: #f5f5dc; /* Light beige background for a paper effect */
-}
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      background-color: #f5f5dc;
+    }
 
-.container {
-    width: 100%;
-    max-width: 600px;
-    background-color: #ffffff; /* White background for content area */
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    min-height: 100vh;
-    border: 1px solid #ccc; /* Light border to mimic paper edges */
-}
-.container2 {
-    width: 50%;
-    max-width: 600px;
-    background-color: #ffffff; /* White background for content area */
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    min-height: 100vh;
-    border: 1px solid #ccc; /* Light border to mimic paper edges */
-}
+    .container {
+      width: 100%;
+      max-width: 550px; /* Reduced width to prevent truncation */
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      min-height: 100vh;
+      border: 1px solid #ccc;
+    }
 
+    .container2 {
+      width: 50%;
+      max-width: 550px; /* Reduced width to keep balance */
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      min-height: 100vh;
+      border: 1px solid #ccc;
+    }
 
-h1, h2 {
-    text-align: center;
-    color: #4b2e2e; /* Darker color for headings */
-}
+    h1, h2 {
+      text-align: center;
+      color: #4b2e2e;
+    }
 
-p {
-    text-align: center;
-    color: #333; /* Dark text for better readability */
-}
+    p {
+      text-align: center;
+      color: #333;
+    }
 
-#timerSettings {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-}
+    #timerSettings {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
 
-#timerSettings select, 
-#timerSettings button {
-    padding: 10px;
-    margin-right: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
+    #timerSettings select,
+    #timerSettings button {
+      padding: 10px;
+      margin-right: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
 
-#timerSettings button {
-    background-color: #4b2e2e; /* Green for set timer button */
-    color: white;
-    cursor: pointer;
-}
+    #timerSettings button {
+      background-color: #4b2e2e;
+      color: white;
+      cursor: pointer;
+    }
 
-#timerSettings button:hover {
-    background-color: #333; /* Darker green on hover */
-}
+    #timerSettings button:hover {
+      background-color: #333;
+    }
 
-#timerMessage {
-    margin-top: 15px;
-    font-size: 18px;
-    color: #333;
-}
+    #timerMessage {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #333;
+    }
 
-img#play_pause {
-    margin-top: 20px;
-    cursor: pointer;
-    width: 100px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+    img#play_pause {
+      margin-top: 20px;
+      cursor: pointer;
+      width: 100px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-input#inputText, input#taskDate {
-    padding: 10px;
-    width: 100%; /* Full width for inputs */
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    margin-bottom: 10px; /* Space between fields */
-}
+    input#inputText, input#taskDate {
+      padding: 10px;
+      width: 95%; /* Reduced width to prevent overlap */
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
 
-button.addBtn {
-    padding: 10px 15px;
-    background-color: #4b2e2e; /* Blue for add button */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+    button.addBtn {
+      padding: 10px 15px;
+      background-color: #4b2e2e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-button.addBtn:hover {
-    background-color: #333; /* Darker blue on hover */
-}
+    button.addBtn:hover {
+      background-color: #333;
+    }
 
-ul#list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    width: 100%;
-}
+    ul#list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+      width: 100%;
+    }
 
-ul#list li {
-    background-color: #f9f9f9; /* Light background for list items */
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: move;
-}
+    ul#list li {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: move;
+    }
 
-ul#list li:hover {
-    background-color: #eef2f5; /* Light hover effect */
-}
+    ul#list li:hover {
+      background-color: #eef2f5;
+    }
 
-ul#list li button {
-    background-color: transparent;
-    border: none;
-    color: #4b2e2e; /* Red for delete button */
-    font-size: 18px;
-    cursor: pointer;
-}
+    ul#list li button {
+      background-color: transparent;
+      border: none;
+      color: #4b2e2e;
+      font-size: 18px;
+      cursor: pointer;
+    }
 
-ul#list li button:hover {
-    color: #333; /* Darker red on hover */
-}
+    ul#list li button:hover {
+      color: #333;
+    }
 
-/* Add styles for links */
-a.calendarLink, a.helpLink {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #4b2e2e; /* Blue color for links */
-    text-decoration: none; /* Remove underline */
-}
+    /* Add styles for links */
+    a.helpLink {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #4b2e2e;
+      text-decoration: none;
+    }
 
-a.calendarLink:hover, a.helpLink:hover {
-    text-decoration: underline; /* Underline on hover */
-}
-/* END STYLES */
+    a.helpLink:hover {
+      text-decoration: underline;
+    }
+
+    #calendarContainer {
+      visibility: hidden;
+      height: 0;
+      margin-top: 20px;
+      transition: visibility 0s, height 0.5s ease-in-out;
+    }
+
+    #calendarToggle {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
 
-
-
   <div class="container">
     <h1>Productivity App</h1>
 
-   
     <h2>Task List</h2>
-    <!-- Calendar and task input aligned and spaced properly -->
     <div class="inputGroup">
-      <!--<input type="text" id="taskDate" placeholder="Pick a date for this task"> -->
       <input type="text" id="inputText" placeholder="Enter a task">
+      <input type="text" id="taskDate" placeholder="Pick a date for this task">
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+      <script>
+        flatpickr("#taskDate", {
+          dateFormat: "Y-m-d",
+          minDate: "today",
+          onChange: function (selectedDates, dateStr, instance) {
+            displayTasksForDate(dateStr);
+          }
+        });
+      </script>
     </div>
     <button class="addBtn" onclick="newElement()">Add</button>
-    <script>
-      // Add event listener for Enter key on the task input field
-      document.getElementById('inputText').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-        e.preventDefault();  // Prevent form submission or unwanted behavior
-        newElement();  // Trigger the Add task function when Enter is pressed
-        }
-      });
-    </script>
-    
 
     <ul id="list">
-      <!-- <li>
-        Sample Task
-        <button onclick="deleteTask(this)">✖</button>
-      </li> -->
+      <!-- Tasks will be added here -->
     </ul>
 
-
-   
-
-
-
-
-
-
-   
-
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-   
-    <script src="tasklist.js"></script>
-    <script src="calendar.js"></script>
-    <script>
-      // Add event listener for Enter key on the task input field
-      document.getElementById('inputText').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          newElement();  // Trigger the Add task function when Enter is pressed
-        }
-      });
-    </script>
-    <a href="calendar.html" class="calendarLink" style="display:block; text-align:center; margin-top:20px;">View Task Calendar</a>
     <a href="help.html" class="helpLink" style="display:block; text-align:center; margin-top:20px;">Need Help?</a>
-
   </div>
 
-  <div class = "container2">
+  <div class="container2">
+    <h2>Timer</h2>
     <p>Select timer length and click set timer when you are ready</p>
 
     <div id="timerSettings">
-      <!-- Timer Dropdowns -->
-     
-
       <select id="minutes">
         <option value="15">Minutes</option>
         <script>
@@ -247,52 +227,191 @@ a.calendarLink:hover, a.helpLink:hover {
           }
         </script>
       </select>
-
-  
-
-      <!-- Set Timer Button -->
-      <button onclick="setTimer()">Set Timer</button>
+      <button onclick="setTimer()">Set/Reset Timer</button>
     </div>
 
-    <p id="timerMessage">Press the Green button to start the timer</p>
+    <p id="timerMessage">Make sure notifications are turned on</p>
 
     <img id="play_pause" src="green_play.png" alt="Play/Pause" />
     <audio id="alarmSound" src="Alarm.mp3" preload="auto"></audio>
     <script src="timer.js"></script>
 
-
-    <div class = "container3">
-      <h1>Task Calendar</h1>
-      <div id="calendar">
-
-      
-
-        <input type="text" id="taskDate" placeholder="Pick a date for this task">
-
-        <SCRIPT>
-          document.getElementById('taskDate').addEventListener('change', function () {
-          const selectedDate = document.getElementById('taskDate').value;
-          displayTasksForDate(selectedDate); 
-        });
-        </SCRIPT>
-        
-
-        <script src="tasklist.js"></script>
-        <script src="calendar.js"></script>
-        
-      </div> <!-- Calendar will render here -->
-    
+    <!-- Moved Calendar Toggle Button to Right Side Below Timer -->
+    <div id="calendarToggle">
+      <button onclick="toggleCalendar()" class="calendarLink">View Task Calendar</button>
     </div>
 
-
-
+    <div id="calendarContainer">
+      <div id="calendar"></div>
+    </div>
   </div>
 
+  <!-- FullCalendar and Custom Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <script src="tasklist.js"></script>
+  <script src="calendar.js"></script>
+  <script>
+    let calendar;
+    let selectedTask;
 
+    function toggleCalendar() {
+      const calendarContainer = document.getElementById('calendarContainer');
 
+      if (calendarContainer.style.visibility === 'hidden' || calendarContainer.style.visibility === '') {
+        // Show calendar
+        calendarContainer.style.visibility = 'visible';
+        calendarContainer.style.height = 'auto';
 
+        // Initialize or render calendar properly
+        if (!calendar) {
+          initializeCalendar();
+        } else {
+          calendar.render(); // Re-render if already initialized
+        }
+      } else {
+        // Hide calendar
+        calendarContainer.style.visibility = 'hidden';
+        calendarContainer.style.height = '0';
+      }
+    }
 
+    function initializeCalendar() {
+      const calendarEl = document.getElementById('calendar');
+      if (calendarEl) {
+        calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          events: JSON.parse(localStorage.getItem('tasks')) || [],
+          eventClick: function(info) {
+            // Highlight the selected task and store it for timer use
+            selectedTask = info.event;
+            alert(`Task "${info.event.title}" selected. You can now use the timer to complete this task.`);
+          }
+        });
+        calendar.render();
+      }
+    }
 
+    document.addEventListener('DOMContentLoaded', function () {
+      // Load tasks for the currently selected date (if any)
+      const initialDate = document.getElementById('taskDate').value;
+      if (initialDate) {
+        displayTasksForDate(initialDate);
+      }
+    });
 
+    function newElement() {
+      const taskTitle = document.getElementById('inputText').value;
+      const taskDate = document.getElementById('taskDate').value;
+
+      if (taskTitle && taskDate) {
+        // Add task to both list and calendar
+        addTaskToList(taskTitle, taskDate);
+        if (calendar) {
+          addTaskToCalendar(taskTitle, taskDate);
+        }
+
+        // Save task to localStorage
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push({ title: taskTitle, start: taskDate, allDay: true });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      } else {
+        alert("Please enter both a task and a date.");
+      }
+    }
+
+    function addTaskToList(title, date) {
+      const li = document.createElement("li");
+      li.textContent = `${title} - ${date}`;
+      document.getElementById("list").appendChild(li);
+
+      // Add delete button for task
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "✖";
+      deleteBtn.onclick = function () {
+        li.remove();
+        removeTaskFromCalendar(title, date);
+        removeTaskFromLocalStorage(title, date);
+      };
+      li.appendChild(deleteBtn);
+    }
+
+    function addTaskToCalendar(title, date) {
+      if (calendar) {
+        calendar.addEvent({
+          title: title,
+          start: date,
+          allDay: true
+        });
+      }
+    }
+
+    function removeTaskFromCalendar(taskTitle, taskDate) {
+      if (calendar) {
+        const events = calendar.getEvents();
+        events.forEach(event => {
+          if (event.title === taskTitle && event.startStr === taskDate) {
+            event.remove();
+          }
+        });
+      }
+    }
+
+    function removeTaskFromLocalStorage(taskTitle, taskDate) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const updatedTasks = tasks.filter(task => !(task.title === taskTitle && task.start === taskDate));
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    }
+
+    function displayTasksForDate(date) {
+      // Clear the existing list
+      const listEl = document.getElementById('list');
+      listEl.innerHTML = '';
+
+      // Get tasks from localStorage and filter for the selected date
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const filteredTasks = tasks.filter(task => task.start === date);
+
+      // Add filtered tasks to the list
+      filteredTasks.forEach(task => addTaskToList(task.title, task.start));
+    }
+
+    function setTimer() {
+      if (!selectedTask) {
+        alert("Please select a task from the calendar first.");
+        return;
+      }
+
+      const timerMinutes = document.getElementById('minutes').value;
+      let timeLeft = timerMinutes * 60; // convert to seconds
+      const timerMessage = document.getElementById('timerMessage');
+      const interval = setInterval(function () {
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          timerMessage.innerText = "Time's up!";
+          document.getElementById('alarmSound').play();
+
+          // Remove the selected task
+          removeTaskFromCalendar(selectedTask.title, selectedTask.startStr);
+          removeTaskFromLocalStorage(selectedTask.title, selectedTask.startStr);
+          removeTaskFromList(selectedTask.title, selectedTask.startStr);
+
+          selectedTask = null; // Clear the selected task
+        } else {
+          timeLeft--;
+          timerMessage.innerText = `Time remaining: ${Math.floor(timeLeft / 60)}:${timeLeft % 60}`;
+        }
+      }, 1000);
+    }
+
+    function removeTaskFromList(taskTitle, taskDate) {
+      const listItems = document.getElementById('list').children;
+      for (let i = 0; i < listItems.length; i++) {
+        if (listItems[i].textContent.startsWith(`${taskTitle} - ${taskDate}`)) {
+          listItems[i].remove();
+          break;
+        }
+      }
+    }
+  </script>
 </body>
 </html>

@@ -3,37 +3,35 @@
 let tasksByDate = {}; // Object to store tasks by date
 let dragged; // Variable to store the dragged item
 
-// Function to create a new task
 function newElement() {
-  const taskDate = document.getElementById("taskDate").value;
-  const taskText = document.getElementById("inputText").value;
+    const taskTitle = document.getElementById('inputText').value;
+    const taskDate = document.getElementById('taskDate').value;
 
-  if (taskDate === '') {
-   taskDate = new Date().toISOString().slice(0, 10); // HOW TO INITIALIZE TO TODAYS DATE
-  }
+    if (taskTitle && taskDate) {
+        // Add task to the task list
+        const li = document.createElement("li");
+        li.textContent = `${taskTitle} - ${taskDate}`;
+        document.getElementById("list").appendChild(li);
 
-  if (taskText === '') {
-    alert("Please enter a task");
-    return;
-  }
+        // Add delete button for task
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "✖";
+        deleteBtn.onclick = function () {
+            li.remove();
+        };
+        li.appendChild(deleteBtn);
 
-  // If there are no tasks for the selected date, initialize an empty array for that date
-  if (!tasksByDate[taskDate]) {
-    tasksByDate[taskDate] = [];
-  }
+        // Add task to the calendar
+        addTaskToCalendar(taskDate, taskTitle);
 
-  // Add the task to the tasks array for the selected date
-  tasksByDate[taskDate].push(taskText);
-
-  // Clear the task input field
-  document.getElementById("inputText").value = '';
-
-  // Save tasks to local storage (optional for persistence)
-  localStorage.setItem('tasksByDate', JSON.stringify(tasksByDate));
-
-  // Display tasks for the selected date
-  displayTasksForDate(taskDate);
+        // Clear input fields
+        document.getElementById('inputText').value = '';
+        document.getElementById('taskDate').value = '';
+    } else {
+        alert("Please enter both a task and a date.");
+    }
 }
+
 
 // Function to display tasks for a specific date
 function displayTasksForDate(date) {
