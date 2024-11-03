@@ -374,9 +374,10 @@
       // Add filtered tasks to the list
       filteredTasks.forEach(task => addTaskToList(task.title, task.start));
     }
-
+    
+    /*
     function setTimer() {
-      if (!selectedTask) {
+     if (!selectedTask) {
         alert("Please select a task from the calendar first.");
         return;
       }
@@ -390,7 +391,7 @@
           timerMessage.innerText = "Time's up!";
           document.getElementById('alarmSound').play();
 
-          // Remove the selected task
+          Remove the selected task
           removeTaskFromCalendar(selectedTask.title, selectedTask.startStr);
           removeTaskFromLocalStorage(selectedTask.title, selectedTask.startStr);
           removeTaskFromList(selectedTask.title, selectedTask.startStr);
@@ -402,6 +403,8 @@
         }
       }, 1000);
     }
+      */
+    
 
     function removeTaskFromList(taskTitle, taskDate) {
       const listItems = document.getElementById('list').children;
