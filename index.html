@@ -246,9 +246,194 @@
   padding: 20px;
   text-align: center;
 }
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    padding: 10px 100px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.appHeader {
+    font-size: 2rem;
+    color: #4b2e2e;
+    font-weight: bold;
+    margin: 1;
+}
   </style>
 </head>
 <body>
+
+<div class = "headerContainer">
+  <header class = "appHeader"> Productivity App</header>
+
+  <button class ="addBtn" id="themeToggle">Toggle Dark Mode</button>
+      <script>
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+        });
+      </script>
+      <style>
+        body.dark-mode {
+          background-color: #121212;
+        }
+        .dark-mode .container {
+          background-color: #1e1e1e;
+          color: #ffffff;
+          border-color: #333;
+        }
+        .dark-mode .container2 {
+          background-color: #1e1e1e;
+          color: #ffffff;
+          border-color: #333;
+        }
+        .dark-mode button, .dark-mode input {
+          background-color: #333;
+          color: #ffffff;
+        }
+        .dark-mode button.addBtn:hover {
+        background-color: black;
+      }
+  
+        .dark-mode h1{
+        text-align: center;
+        color: #ffffff;
+      }
+      .dark-mode h2{
+        text-align: center;
+        color: #ffffff;
+      }
+  
+      .dark-mode p {
+        text-align: center;
+        color: #eef2f5;
+      }
+  
+      .dark-mode #timerSettings {
+        color: #eef2f5;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+  
+     .dark-mode #timerSettings select,
+      .dark-mode #timerSettings button {
+        padding: 10px;
+        margin-right: 5px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+  
+      .dark-mode #timerSettings button {
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+      }
+  
+     .dark-mode #timerSettings button:hover {
+        background-color: black;
+      }
+  
+      .dark-mode #timerMessage {
+        margin-top: 15px;
+        font-size: 18px;
+        color: #eef2f5;
+      }
+  
+      .dark-mode ul#list li {
+        background-color: #333;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: move;
+      }
+  
+      .dark-mode ul#list li:hover {
+        background-color: black;
+      }
+  
+      .dark-mode .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    padding: 10px 100px;
+    background-color:  #1e1e1e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .appHeader {
+    font-size: 2rem;
+    color: #eef2f5;
+    font-weight: bold;
+    margin: 1;
+}
+  
+  
+      footer.dark-mode {
+    width: 100%;
+    background-color: #1e1e1e;
+    color: #1e1e1e;
+    text-align: center;
+    padding: 5px;
+    margin-top: auto; /* Push the footer to the bottom of the page if content is less */
+  }
+  
+  .dark-mode .footerContainer  {
+    background-color: #1e1e1e;
+    width: 100%;
+  }
+  
+  .socialIcons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .dark-mode .socialIcons a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #1e1e1e;
+    margin: 10px;
+    border-radius: 50%;
+  }
+  
+  .dark-mode .socialIcons a i {
+    font-size: 2em;
+    color:  #eef2f5;
+  }
+  
+  .footerNavigation ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+  }
+  
+  .dark-mode .footerNavigation ul li a {
+    color: white;
+    margin: 20px;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  
+  .dark-mode .footerBottom {
+    background-color: #1e1e1e;
+    padding: 20px;
+    text-align: center;
+  }
+  
+      </style>
+</div>
+
+
 
 <div Class = "main">
   <div Class = "content">
@@ -259,7 +444,7 @@
 
 
   <div class="container">
-    <h1>Productivity App</h1>
+    
 
     <h2>Task List</h2>
     <div class="inputGroup">
@@ -285,152 +470,7 @@
     
 
 
-    <button class ="addBtn" id="themeToggle">Toggle Dark Mode</button>
-    <script>
-      const themeToggle = document.getElementById('themeToggle');
-      themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-      });
-    </script>
-    <style>
-      body.dark-mode {
-        background-color: #121212;
-      }
-      .dark-mode .container {
-        background-color: #1e1e1e;
-        color: #ffffff;
-        border-color: #333;
-      }
-      .dark-mode .container2 {
-        background-color: #1e1e1e;
-        color: #ffffff;
-        border-color: #333;
-      }
-      .dark-mode button, .dark-mode input {
-        background-color: #333;
-        color: #ffffff;
-      }
-      .dark-mode button.addBtn:hover {
-      background-color: black;
-    }
-
-      .dark-mode h1{
-      text-align: center;
-      color: #ffffff;
-    }
-    .dark-mode h2{
-      text-align: center;
-      color: #ffffff;
-    }
-
-    .dark-mode p {
-      text-align: center;
-      color: #eef2f5;
-    }
-
-    .dark-mode #timerSettings {
-      color: #eef2f5;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 15px;
-    }
-
-   .dark-mode #timerSettings select,
-    .dark-mode #timerSettings button {
-      padding: 10px;
-      margin-right: 5px;
-      border: 1px solid #333;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    .dark-mode #timerSettings button {
-      background-color: #333;
-      color: white;
-      cursor: pointer;
-    }
-
-   .dark-mode #timerSettings button:hover {
-      background-color: black;
-    }
-
-    .dark-mode #timerMessage {
-      margin-top: 15px;
-      font-size: 18px;
-      color: #eef2f5;
-    }
-
-    .dark-mode ul#list li {
-      background-color: #333;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      cursor: move;
-    }
-
-    .dark-mode ul#list li:hover {
-      background-color: black;
-    }
-
-
-
-
-    footer.dark-mode {
-  width: 100%;
-  background-color: #1e1e1e;
-  color: #1e1e1e;
-  text-align: center;
-  padding: 5px;
-  margin-top: auto; /* Push the footer to the bottom of the page if content is less */
-}
-
-.dark-mode .footerContainer  {
-  background-color: #1e1e1e;
-  width: 100%;
-}
-
-.socialIcons {
-  display: flex;
-  justify-content: center;
-}
-
-.dark-mode .socialIcons a {
-  text-decoration: none;
-  padding: 10px;
-  background-color: #1e1e1e;
-  margin: 10px;
-  border-radius: 50%;
-}
-
-.dark-mode .socialIcons a i {
-  font-size: 2em;
-  color:  #eef2f5;
-}
-
-.footerNavigation ul {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-}
-
-.dark-mode .footerNavigation ul li a {
-  color: white;
-  margin: 20px;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.dark-mode .footerBottom {
-  background-color: #1e1e1e;
-  padding: 20px;
-  text-align: center;
-}
-
-    </style>
+    
 
 
 
