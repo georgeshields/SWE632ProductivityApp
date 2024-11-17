@@ -1,78 +1,67 @@
-let countdown; // Global variable for interval
-let time_seconds = 0; // Time to count down
-let isPaused = true; // Start in a paused state
+let countdown;
+let time_seconds = 0;
+let isPaused = true; 
 
-// Function to set the timer based on dropdown selections
-function setTimer() {
-  const hours = parseInt(document.getElementById('hours').value);
-  const minutes = parseInt(document.getElementById('minutes').value);
-  const seconds = parseInt(document.getElementById('seconds').value);
+function setTimer() { // take information form index.html
+  let minutes = parseInt(document.getElementById('minutes').value) ;
 
-  // Convert hours, minutes, and seconds to total seconds
-  time_seconds = (hours * 3600) + (minutes * 60) + seconds;
+// math to calculate the time in seconds to make all under same variable
+  time_seconds = (minutes * 60) ;
 
+  // while timer is running
   if (time_seconds > 0) {
-    document.getElementById('timerMessage').innerText = "Timer set for " + hours + " hr " + minutes + " min " + seconds + " sec";
-    document.getElementById('play_pause').src = 'green_play.png'; // Reset play icon
-    isPaused = true; // Set initial state to paused
-    clearInterval(countdown); // Clear any existing intervals
+    document.getElementById('timerMessage').innerText = "Timer set for " + minutes + " min " ;
+    document.getElementById('play_pause').src = 'green_play.png';
+    clearInterval(countdown);
   } else {
-    alert("Please set a valid time!");
+    alert("Please set a valid time!"); // if time is 0. 
   }
 }
 
-// Function to toggle play/pause
 function toggleTimer() {
+  if (time_seconds == 0){
+    setTimer(); // activates set timer if button was not pressed. Or if user did not set their timer settings
+  }
   if (isPaused && time_seconds > 0) {
-    startTimer();
+    startTimer(); // if timer paused and is running start the timer
   } else {
-    pauseTimer();
+    pauseTimer(); 
   }
 }
 
-// Start or resume the timer
 function startTimer() {
-  isPaused = false;
-  document.getElementById('play_pause').src = 'running_timer.png'; // Update icon to running
-  countdown = setInterval(updateTimer, 1000); // Start the countdown
+  
+  isPaused = false; // not paused
+  document.getElementById('play_pause').src = 'running_timer.png';
+  countdown = setInterval(updateTimer, 1000);
 }
 
-// Pause the timer
 function pauseTimer() {
-  clearInterval(countdown); // Stop the interval
-  isPaused = true; // Timer is now paused
-  document.getElementById('play_pause').src = 'stop.png'; // Update icon to paused
+  clearInterval(countdown);
+  isPaused = true;
+  document.getElementById('play_pause').src = 'stop.png';
   document.getElementById('timerMessage').innerText = "Paused at " + formatTime(time_seconds);
 }
 
-// Update the timer every second
-function updateTimer() {
+function updateTimer() { // called by start timer function
   if (time_seconds > 0) {
-    time_seconds--; // Decrease the time by 1 second
+    time_seconds--;
     document.getElementById('timerMessage').innerText = "Countdown: " + formatTime(time_seconds);
   } else {
-    clearInterval(countdown); // Stop the interval when time is up
+    clearInterval(countdown);
     document.getElementById('alarmSound').play();
-    document.getElementById('play_pause').src = 'green_play.png'; // Reset to play icon
+    document.getElementById('play_pause').src = 'green_play.png';
     document.getElementById('timerMessage').innerText = "Timer stopped";
-    // Play the alarm sound
-    const alarmSound = document.getElementById('alarmSound');
-    alarmSound.play();
-
-    // Show alert and stop sound after user closes the alert
     alert("Timer done");
-    alarmSound.pause();          // Pause the sound
-    alarmSound.currentTime = 0;  // Reset the sound to the start
+    document.getElementById('alarmSound').pause();
+    document.getElementById('alarmSound').currentTime = 0;
   }
 }
 
-// Format time as hh:mm:ss
 function formatTime(seconds) {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
+  const m = Math.floor((seconds) / 60);
   const s = seconds % 60;
-  return h + " hr " + m + " min " + s + " sec";
+  return m + " min " + s + " sec";
 }
 
-// Event listener for the play/pause button
 document.getElementById('play_pause').addEventListener('click', toggleTimer);
